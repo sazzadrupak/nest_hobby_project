@@ -12,11 +12,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Coffee = void 0;
 const eager_import_0 = require("../flavor.entity/flavor.entity");
 const graphql_1 = require("@nestjs/graphql");
+const drink_interface_1 = require("../../../common/interfaces/drink.interface/drink.interface");
 const typeorm_1 = require("typeorm");
 const flavor_entity_1 = require("../flavor.entity/flavor.entity");
 let Coffee = class Coffee {
     static _GRAPHQL_METADATA_FACTORY() {
-        return { name: { type: () => String }, brand: { type: () => String }, flavors: { nullable: true, type: () => [require("../flavor.entity/flavor.entity").Flavor] } };
+        return { name: { type: () => String }, brand: { type: () => String }, flavors: { nullable: true, type: () => [require("../flavor.entity/flavor.entity").Flavor] }, createdAt: { nullable: true, type: () => Date } };
     }
 };
 exports.Coffee = Coffee;
@@ -38,8 +39,12 @@ __decorate([
     (0, typeorm_1.ManyToMany)(() => flavor_entity_1.Flavor, (flavor) => flavor.coffees, { cascade: true }),
     __metadata("design:type", Array)
 ], Coffee.prototype, "flavors", void 0);
+__decorate([
+    (0, typeorm_1.CreateDateColumn)(),
+    __metadata("design:type", Date)
+], Coffee.prototype, "createdAt", void 0);
 exports.Coffee = Coffee = __decorate([
     (0, typeorm_1.Entity)(),
-    (0, graphql_1.ObjectType)({ description: 'Coffee model' })
+    (0, graphql_1.ObjectType)({ description: 'Coffee model', implements: () => drink_interface_1.Drink })
 ], Coffee);
 //# sourceMappingURL=coffee.entity.js.map

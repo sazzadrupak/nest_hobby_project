@@ -15,6 +15,9 @@ const path_1 = require("path");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const coffees_module_1 = require("./coffees/coffees.module");
+const date_scalar_1 = require("./common/scalars/date.scalar/date.scalar");
+const tea_entity_1 = require("./teas/entities/tea.entity/tea.entity");
+const drinks_resolver_1 = require("./drinks/drinks.resolver");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -36,12 +39,13 @@ exports.AppModule = AppModule = __decorate([
                 autoSchemaFile: (0, path_1.join)(process.cwd(), 'src/schema.gql'),
                 buildSchemaOptions: {
                     numberScalarMode: 'integer',
+                    orphanedTypes: [tea_entity_1.Tea],
                 },
             }),
             coffees_module_1.CoffeesModule,
         ],
         controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
+        providers: [app_service_1.AppService, date_scalar_1.DateScalar, drinks_resolver_1.DrinksResolver],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map
