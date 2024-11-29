@@ -11,13 +11,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Coffee = void 0;
 const eager_import_0 = require("../flavor.entity/flavor.entity");
+const eager_import_1 = require("../../../common/enums/coffee-type.enum");
 const graphql_1 = require("@nestjs/graphql");
+const coffee_type_enum_1 = require("../../../common/enums/coffee-type.enum");
 const drink_interface_1 = require("../../../common/interfaces/drink.interface/drink.interface");
+const logger_middleware_1 = require("../../../common/middleware/logger.middleware");
 const typeorm_1 = require("typeorm");
 const flavor_entity_1 = require("../flavor.entity/flavor.entity");
 let Coffee = class Coffee {
     static _GRAPHQL_METADATA_FACTORY() {
-        return { name: { type: () => String }, brand: { type: () => String }, flavors: { nullable: true, type: () => [require("../flavor.entity/flavor.entity").Flavor] }, createdAt: { nullable: true, type: () => Date } };
+        return { brand: { type: () => String }, flavors: { nullable: true, type: () => [require("../flavor.entity/flavor.entity").Flavor] }, createdAt: { nullable: true, type: () => Date }, type: { nullable: true, type: () => require("../../../common/enums/coffee-type.enum").CoffeeType } };
     }
 };
 exports.Coffee = Coffee;
@@ -27,6 +30,7 @@ __decorate([
     __metadata("design:type", Number)
 ], Coffee.prototype, "id", void 0);
 __decorate([
+    (0, graphql_1.Field)(() => String, { middleware: [logger_middleware_1.loggerMiddleware] }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Coffee.prototype, "name", void 0);
@@ -43,6 +47,10 @@ __decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
 ], Coffee.prototype, "createdAt", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], Coffee.prototype, "type", void 0);
 exports.Coffee = Coffee = __decorate([
     (0, typeorm_1.Entity)(),
     (0, graphql_1.ObjectType)({ description: 'Coffee model', implements: () => drink_interface_1.Drink })

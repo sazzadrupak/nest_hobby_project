@@ -3,6 +3,7 @@
 //       name: "Shipwreck Roast 3",
 //       brand: "Buddybrew",
 //       flavors: ["chocolate", "vanilla"]
+//       type: ROBUSTA
 //   }) {
 //       id,
 //       name,
@@ -16,6 +17,7 @@
 //     id
 //     name
 //     brand
+//     type
 //     flavors {
 //       id
 //       name

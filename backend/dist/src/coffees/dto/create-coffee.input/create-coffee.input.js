@@ -10,11 +10,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateCoffeeInput = void 0;
+const eager_import_0 = require("../../../common/enums/coffee-type.enum");
 const graphql_1 = require("@nestjs/graphql");
 const class_validator_1 = require("class-validator");
 let CreateCoffeeInput = class CreateCoffeeInput {
     static _GRAPHQL_METADATA_FACTORY() {
-        return { brand: { type: () => String }, flavors: { type: () => [String] } };
+        return { brand: { type: () => String }, flavors: { type: () => [String] }, type: { type: () => require("../../../common/enums/coffee-type.enum").CoffeeType } };
     }
 };
 exports.CreateCoffeeInput = CreateCoffeeInput;
